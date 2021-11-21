@@ -16,11 +16,17 @@
     <tbody>
         @foreach (var disks in Model)
         {
-            <tr>
-                <td>@disks.DiskId</td>
-                <td>@disks.ReleaseDate</td>
-                <td>@disks.CdName</td>
-            </tr>
+        <tr>
+            <td>@disks.DiskId</td>
+            <td>@disks.ReleaseDate</td>
+            <td>@disks.CdName</td>
+            <td>
+                <a asp-controller="Disk" asp-action="Edit" asp-route-id="@disks.DiskId">Edit</a>
+            </td>
+            <td>
+                <a asp-controller="Disk" asp-action="Delete" asp-route-id="@disks.DiskId">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
