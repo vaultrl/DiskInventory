@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
+#nullable disable
 
 namespace DiskInventory.Models
 {
@@ -11,12 +9,12 @@ namespace DiskInventory.Models
     {
         public DiskType()
         {
-            Disk = new HashSet<Disk>();
+            Disks = new HashSet<Disk>();
         }
 
         public int DiskTypeId { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Disk> Disk { get; set; }
+        public virtual ICollection<Disk> Disks { get; set; }
     }
 }

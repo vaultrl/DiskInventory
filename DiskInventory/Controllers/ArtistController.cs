@@ -3,49 +3,51 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using DiskInventory.Models;
 
 namespace DiskInventory.Controllers
 {
     public class ArtistController : Controller
     {
-        private disk_inventoryjcContext context { get; set; }
-        public ArtistController(disk_inventoryjcContext ctx)
+        private disk_inventoryjwContext context { get; set; }
+        public ArtistController(disk_inventoryjwContext ctx)
         {
             context = ctx;
         }
         public IActionResult Index()
         {
-            List<Artist> artists = context.Artist.OrderBy(a => a.Description).ToList();
+            //List<Artist> artists = context.Artists.OrderBy(a => a.Lname).ThenBy(a => a.Fname).ToList();
+            var artists = context.Artists.OrderBy(a => a.Lname).ThenBy(a => a.Fname).Include(at => at.ArtistType).ToList();
             return View(artists);
         }
+        [HttpGet]
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
-            ViewBag.ArtistTypes = context.ArtistType.OrderBy(t => t.Description).ToList();
+            ViewBag.ArtistTypes = context.ArtistTypes.OrderBy(t => t.Description).ToList();
             return View("Edit", new Artist());
         }
         [HttpGet]
         public IActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ViewBag.ArtistTypes = context.ArtistType.OrderBy(t => t.Description).ToList();
-            var artist = context.Artist.Find(id);
+            ViewBag.ArtistTypes = context.ArtistTypes.OrderBy(t => t.Description).ToList();
+            var artist = context.Artists.Find(id);
             return View(artist);
         }
-
         [HttpPost]
         public IActionResult Edit(Artist artist)
         {
             if (ModelState.IsValid)
             {
-                if (artist.ArtistId == 0)
+                if (artist.ArtistId == 0)    //means add the artist
                 {
-                    context.Artist.Add(artist);
+                    context.Artists.Add(artist);
                 }
-                else
+                else                        //means update the artist
                 {
-                    context.Artist.Update(artist);
+                    context.Artists.Update(artist);
                 }
                 context.SaveChanges();
                 return RedirectToAction("Index", "Artist");
@@ -53,23 +55,22 @@ namespace DiskInventory.Controllers
             else
             {
                 ViewBag.Action = (artist.ArtistId == 0) ? "Add" : "Edit";
-                ViewBag.ArtistTypes = context.ArtistType.OrderBy(t => t.Description).ToList();
+                ViewBag.ArtistTypes = context.ArtistTypes.OrderBy(t => t.Description).ToList();
                 return View(artist);
             }
         }
-       [HttpGet]
+        [HttpGet]
         public IActionResult Delete(int id)
         {
-            var artist = context.Artist.Find(id);
+            var artist = context.Artists.Find(id);
             return View(artist);
         }
         [HttpPost]
         public IActionResult Delete(Artist artist)
         {
-            context.Artist.Remove(artist);
+            context.Artists.Remove(artist);
             context.SaveChanges();
             return RedirectToAction("Index", "Artist");
-
         }
     }
 }

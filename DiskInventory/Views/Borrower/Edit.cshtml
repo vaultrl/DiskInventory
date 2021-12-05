@@ -1,5 +1,5 @@
-﻿@model Artist
-@{ 
+﻿@model Borrower
+@{
     string title = ViewBag.Action;
     ViewBag.Title = title;
 }
@@ -14,18 +14,13 @@
         <label asp-for="Lname">Last Name</label>
         <input asp-for="Lname" class="form-control" />
     </div>
-    <div>
-        <label asp-for="ArtistTypeId">Artist Type</label>
-        <select asp-for="ArtistTypeId" class="form-control">
-            <option value="select a type">select a type</option>
-            @foreach (ArtistType t in ViewBag.ArtistTypes)
-            {
-                <option value="@t.ArtistTypeId">@t.Description</option>
-            }
-        </select>
+    <div class="form-group">
+        <label asp-for="PhoneNum">Phone Number</label>
+        <input asp-for="PhoneNum" class="form-control" />
     </div>
-    <input type="hidden" asp-for="ArtistId" />
+    <input type="hidden" asp-for="BorrowerId" />
     <br />
     <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
-    <a asp-controller="Artist" asp-action="Index" class="btn btn-primary">Cancel</a>
+    <a asp-controller="Borrower" asp-action="Index" class="btn btn-primary">Cancel</a>
 </form>
+
