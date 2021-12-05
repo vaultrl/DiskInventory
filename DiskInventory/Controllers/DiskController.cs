@@ -19,5 +19,15 @@ namespace DiskInventory.Controllers
             List<Disk> disks = context.Disk.OrderBy(c => c.CdName).ThenBy(c => c.ReleaseDate).ToList();
             return View(disks);
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Action = "Edit";
+            ViewBag.DiskTypes = context.DiskType.OrderBy(t => t.Description).ToList();
+            ViewBag.Statuses = context.Status.OrderBy(s => s.Description).ToList();
+            ViewBag.Genres = context.Genre.OrderBy(g => g.Description).ToList();
+            var disk = context.Disk.Find(id);
+            return View(disk);
+        }
     }
 }

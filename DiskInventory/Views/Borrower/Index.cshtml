@@ -4,7 +4,7 @@
 }
 
 <h1>@ViewBag.Title</h1>
-
+<a asp-controller="Borrower" asp-action="Add">Add an borrower</a>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -17,12 +17,18 @@
     <tbody>
         @foreach (var borrower in Model)
         {
-            <tr>
-                <td>@borrower.BorrowerId</td>
-                <td>@borrower.Lname</td>
-                <td>@borrower.Fname</td>
-                <td>@borrower.Phone</td>
-            </tr>
+        <tr>
+            <td>@borrower.BorrowerId</td>
+            <td>@borrower.Lname</td>
+            <td>@borrower.Fname</td>
+            <td>@borrower.Phone</td>
+            <td>
+                <a asp-controller="Borrower" asp-action="Edit" asp-route-id="@borrower.BorrowerId">Edit</a>
+            </td>
+            <td>
+                <a asp-controller="Borrower" asp-action="Delete" asp-route-id="@borrower.BorrowerId">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
