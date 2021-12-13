@@ -14,7 +14,7 @@ namespace DiskInventory.Models
         {
             DiskArtist = new HashSet<DiskArtist>();
         }
-
+        [Key]
         public int ArtistId { get; set; }
         [Required]
         public int? ArtistTypeId { get; set; }

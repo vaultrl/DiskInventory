@@ -4,13 +4,16 @@
 }
 
 <h1>@ViewBag.Title</h1>
-
+<a asp-controller="Disk" asp-action="Add">Add an Disk</a>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Disk ID</th>
             <th>Release Date</th>
             <th>CD Name</th>
+            <th>Genre</th>
+            <th>Status</th>
+            <th>Type</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +23,9 @@
             <td>@disks.DiskId</td>
             <td>@disks.ReleaseDate</td>
             <td>@disks.CdName</td>
+            <td>@disks.GenreId</td>
+            <td>@disks.DiskStatusId</td>
+            <td>@disks.DiskTypeId</td>
             <td>
                 <a asp-controller="Disk" asp-action="Edit" asp-route-id="@disks.DiskId">Edit</a>
             </td>

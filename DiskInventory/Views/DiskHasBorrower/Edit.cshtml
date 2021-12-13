@@ -9,10 +9,10 @@
 <form asp-action="Edit" method="post">
 
     <div>
-        <label asp-for="DiskId">Genre</label>
+        <label asp-for="DiskId">Disk</label>
         <select asp-for="DiskId" class="form-control">
             <option value="select a Disk">select a Disk</option>
-            @foreach (Disk d in ViewBag.Disks)
+            @foreach (Disk d in ViewBag.Disk)
             {
                 <option value="@d.DiskId">@d.CdName</option>
             }
@@ -23,9 +23,9 @@
         <label asp-for="BorrowerId">Borrower</label>
         <select asp-for="BorrowerId" class="form-control">
             <option value="select a borrower">select a borrower</option>
-            @foreach (Borrower b in ViewBag.borrowers)
+            @foreach (Borrower b in ViewBag.Borrowers)
             {
-                <option value="@b.BorrowerId">@b.BorrowerId</option>
+                <option value="@b.BorrowerId">@b.Lname, @b.Fname</option>
             }
         </select>
 

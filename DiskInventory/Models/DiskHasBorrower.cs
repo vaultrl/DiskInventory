@@ -11,6 +11,7 @@ namespace DiskInventory.Models
 {
     public partial class DiskHasBorrower
     {
+        public int DiskHasBorrowerId { get; set; }
         public string BorrowStatus { get; set; }
         [Required]
         public int? DiskId { get; set; }

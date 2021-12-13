@@ -41,7 +41,7 @@ namespace DiskInventory.Controllers
                     context.Borrower.Update(borrower);
                 }
                 context.SaveChanges();
-                return RedirectToAction("Index", "Artist");
+                return RedirectToAction("Index", "Borrower");
             }
             else
             {

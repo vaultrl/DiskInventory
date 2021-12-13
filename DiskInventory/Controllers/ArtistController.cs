@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using DiskInventory.Models;
 
 namespace DiskInventory.Controllers
@@ -41,7 +42,8 @@ namespace DiskInventory.Controllers
             {
                 if (artist.ArtistId == 0)
                 {
-                    context.Artist.Add(artist);
+                    context.Database.ExecuteSqlRaw("execute sp_ins_artist @p0, @p1",
+                        parameters: new[] { artist.Description, artist.ArtistTypeId.ToString(), artist.Description });
                 }
                 else
                 {
